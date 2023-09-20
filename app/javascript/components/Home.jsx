@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import Selection from './Selection';
 import Cart from './Cart';
@@ -23,7 +23,9 @@ function Home() {
         );
 }
 const container = document.getElementById('home');
-const root = createRoot(container);
-root.render(<Home />);
+if (container){
+  const root = createRoot(container);
+  root.render(<Home />);
+}
 
 export default Home;

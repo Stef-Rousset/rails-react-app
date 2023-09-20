@@ -5,9 +5,23 @@ import axios from 'axios';
 function Selection({cart, setCart}) {
   const [plantSelection, setPlantSelection] = useState([])
   //cart est un array d'objets
+  const allPlants = document.getElementById('plants')
+  let query = ""
+  let url = ""
+  if (allPlants){
+    query = allPlants.getAttribute('data-target')
+  }
+  if (query){
+    url = `/api/v1/plants/selection?query=${query}`
+  } else if (allPlants){
+    url = '/api/v1/plants/'
+  } else {
+    url = '/api/v1/plants/selection'
+  }
+  //const url = query ? `/api/v1/plants/selection?query=${query}` : allPlants ? '/api/v1/plants/' : '/api/v1/plants/selection'
 
   useEffect(() => {
-    axios.get('/api/v1/plants/selection')
+    axios.get(url)
       .then(function (response) {
         // handle success
         //console.log(response);
@@ -20,7 +34,7 @@ function Selection({cart, setCart}) {
       });
   }, [])
 
-  const addToCart = (id, name, price) => {
+  function addToCart(id, name, price) {
     const currentPlantAdded = cart.find(plant => plant.id === id)
     //si le cart contient déjà la plante
     if (currentPlantAdded) {
@@ -34,14 +48,15 @@ function Selection({cart, setCart}) {
     }
   }
 
+
   return (
-          <div className="selection-container flex justify-between items-start w-full h-full">
+    <div className="plant-container flex justify-between items-start w-full h-full overflow-y-scroll">
             {plantSelection.map(plant =>
               <div key={plant.id} className="w-1/4 h-3/4 mx-auto my-6 bg-white grid grid-cols-1 gap-4 grid-rows-[1fr_4fr_1fr_1fr] p-4 border rounded" >
                 <h3 className="font-semibold text-lg">{plant.name}</h3>
                 <p className="text-justify overflow-y-scroll">{plant.description}</p>
                 <p>Prix: {plant.price}€</p>
-                <button onClick={addToCart(plant.id, plant.name, plant.price)} className="font-semibold bg-green-200 border rounded w-full">Ajouter au panier</button>
+                <button onClick={() => addToCart(plant.id, plant.name, plant.price)} className="font-semibold bg-green-200 border rounded w-full">Ajouter au panier</button>
               </div>
             )}
            </div>

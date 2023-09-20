@@ -8,7 +8,11 @@ class Api::V1::PlantsController < ActionController::Base
 
   #GET api/v1/plants/selection
   def selection
-    @plants = Plant.order(created_at: :desc).first(3)
+    if params[:query].present?
+      @plants = Plant.where('name ILIKE ?', "#{params[:query]}")
+    else
+      @plants = Plant.order(created_at: :desc).first(3)
+    end
     render json: @plants
   end
 
