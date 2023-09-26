@@ -5,9 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+p "deleting exisiting plants"
 Plant.destroy_all
-
 p "creating plants"
 one = Plant.create!(name: "arnica", description: "Plante herbacée fleurie qui ravit avec ses capitules en forme de disque qui se montrent dès l’été. En dehors des vertus médicinales de certaines espèces, c’est avant tout une belle plante ornementale pour les coins arides et ensoleillés de votre jardin ou de votre balcon.", price: 4.5)
 two = Plant.create!(name: "buis", description: "Sensible au climat, au sol et aux nuisibles, le buis est un arbuste au feuillage persistant parfait pour la construction d’une haie !", price: 7.5)
+three = Plant.create!(name: "glycine", description: "Plante facile d’entretien, majoritairement destinées à la décoration des jardins, grâce à ses belles grappes de fleurs entre le bleu, le violet et le blanc.", price: 3.0)
 p "plants created"

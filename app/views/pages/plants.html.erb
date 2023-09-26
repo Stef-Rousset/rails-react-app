@@ -1,0 +1,20 @@
+<main class="w-screen my-12" style="height:70%">
+  <aside class="w-10/12 mx-auto bg-green-200 border rounded p-2">
+  <%= form_with url: plants_path, method: :get, data: {turbo: false }, class: "flex flex-col w-full" do |form| %>
+    <div class="flex w-full justify-between items-center">
+      <%= form.label :query, "Rechercher une plante", class: "font-semibold mt-1" %>
+      <% if @query.present? %>
+        <%= link_to "Revenir à la liste des plantes", plants_path, data: {turbo: false }, class: "bg-gray-100 font-semibold p-1"%>
+      <% else %>
+        <%= link_to "Revenir à l'accueil", root_path, data: {turbo: false }, class: "bg-gray-100 font-semibold p-1"%>
+      <% end %>
+    </div>
+    <%= form.text_field :query, placeholder: "buis", class: "bg-gray-100 mt-1 w-1/2" %>
+    <%= form.submit "Rechercher", class: "bg-gray-100 font-semibold mt-1 w-1/2" %>
+  <% end %>
+
+  </aside>
+  <section id="plants" class="w-10/12 h-5/6 mx-auto my-4 bg-gray-100 border rounded p-2"
+  <% if @query.present? %>data-target=<%= @query %><% end %>
+  ></section>
+</main>
