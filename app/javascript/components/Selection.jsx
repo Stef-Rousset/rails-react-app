@@ -50,16 +50,16 @@ function Selection({cart, setCart}) {
 
 
   return (
-    <div className="plant-container flex justify-between items-start w-full h-full overflow-y-scroll">
+          <div className={"plant-container" + (allPlants ? ' grid grid-cols-3 ' : ' flex justify-between ') + "items-start w-full h-full overflow-y-scroll"} >
             {plantSelection.map(plant =>
-              <div key={plant.id} className="w-1/4 h-3/4 mx-auto my-6 bg-white grid grid-cols-1 gap-4 grid-rows-[1fr_4fr_1fr_1fr] p-4 border rounded" >
+              <div key={plant.id} className={(allPlants ? "w-4/5 " : "w-1/4 ") + "h-3/4 mx-auto my-6 bg-white grid grid-cols-1 gap-4 grid-rows-[1fr_4fr_1fr_1fr] p-4 border rounded"} >
                 <h3 className="font-semibold text-lg">{plant.name}</h3>
                 <p className="text-justify overflow-y-scroll">{plant.description}</p>
                 <p>Prix: {plant.price}€</p>
                 <button onClick={() => addToCart(plant.id, plant.name, plant.price)} className="font-semibold bg-green-200 border rounded w-full">Ajouter au panier</button>
               </div>
             )}
-           </div>
+          </div>
           )
 }
 export default Selection;
